@@ -5,6 +5,7 @@ A lightweight C# implementation of matrices and appropriate operations.
 * Matrix Addition
 * Scalar Multiplication
 * Matrix Multiplication
+* Hadamard Product (Entrywise Product)
 
 ##Overloaded Operators
 * [,]-style indexing, "1" based (as per the mathematical standard)
