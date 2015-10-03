@@ -239,6 +239,25 @@ namespace Matrices {
             return Multiply(a, b);
         }
 
+        //For two matrices a and b of the same dimensions, the Hadamard product is a matrix for which
+        //each element is the product of its two corresponding elements in matrices a and b
+        //HadamardProduct(a, b)[i, j] = a[i, j] * b[i, j]
+        public static Matrix HadamardProduct(Matrix a, Matrix b) {
+            if (a == null || b == null) {
+                throw new NullReferenceException("Cannot take the Hadamard product of null matrices.");
+            }
+            if (a.NumColumns != b.NumColumns || a.NumRows != b.NumRows) {
+                throw new ArgumentException("Cannot take the Hadamard product of matrices of different dimensions.");
+            }
+            Matrix output = new Matrix(a.NumRows, a.NumColumns);
+            for (int i = 1; i <= a.NumRows; ++i) {
+                for (int j = 1; j <= a.NumColumns; ++j) {
+                    output[i, j] = a[i, j] * b[i, j];
+                }
+            }
+            return output;
+        }
+
         #endregion
     }
 }

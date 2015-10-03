@@ -361,5 +361,71 @@ namespace Matrix_Test.cs {
 
         #endregion
 
+        #region Hadamard_Test
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void Matrix_HadamardNullMatrixArgument_ThrowsException() {
+            Matrix matrix = null;
+            Matrix matrix2 = new Matrix(3);
+            Matrix matrix3 = Matrix.HadamardProduct(matrix, matrix2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Matrix_HadamardDifferentlySizedMatrices_ThrowsException() {
+            Matrix matrix = new Matrix(4, 5);
+            Matrix matrix2 = new Matrix(4);
+            Matrix matrix3 = Matrix.HadamardProduct(matrix, matrix2);
+        }
+
+        [TestMethod]
+        public void Matrix_HadamardZeroMatrices_ResultZeros() {
+            Matrix matrix = new Matrix(3);
+            Matrix matrix2 = new Matrix(3);
+            Assert.IsTrue(matrix == Matrix.HadamardProduct(matrix, matrix2));
+        }
+
+        [TestMethod]
+        public void Matrix_HadamardZeroTimesMatrix_ResultZeros() {
+            float[,] array = new float[,] { { 1, 2, 3 }, 
+                                            { 4, 5, 6 }, 
+                                            { 7, 8, 9 } };
+            Matrix matrix = new Matrix(array);
+            Matrix matrix2 = new Matrix(3);
+            Assert.IsTrue(matrix2 == Matrix.HadamardProduct(matrix, matrix2));
+        }
+
+        [TestMethod]
+        public void Matrix_HadamardValidMatrices_ResultsCorrect1() {
+            float[,] array = new float[,] { { 3, 8, 4.5F } };
+            float[,] array2 = new float[,] { { 1, 1, 1 } };
+            float[,] array3 = new float[,] { { 3, 8, 4.5F } };
+            Matrix matrix = new Matrix(array);
+            Matrix matrix2 = new Matrix(array2);
+            Matrix matrix3 = new Matrix(array3);
+            Assert.AreEqual(matrix3, Matrix.HadamardProduct(matrix, matrix2));
+        }
+
+        [TestMethod]
+        public void Matrix_HadamardValidMatrices_ResultsCorrect2() {
+            float[,] array = new float[,] { { 1, 2, 3, 1.5F }, 
+                                            { 4, 5, 6, 4.5F }, 
+                                            { 7, 8, 9, 7.5F } };
+            float[,] array2 = new float[,] { { 1, 2,  3,  4 }, 
+                                             { 5, 6,  7,  8 }, 
+                                             { 9, 10, 11, 12 } };
+            float[,] array3 = new float[,] { { 1,  4,  9,  6 }, 
+                                             { 20,  30, 42, 36 }, 
+                                             { 63, 80, 99, 90 } };
+            Matrix matrix = new Matrix(array);
+            Matrix matrix2 = new Matrix(array2);
+            Matrix matrix3 = new Matrix(array3);
+            Assert.AreEqual(matrix3, Matrix.HadamardProduct(matrix, matrix2));
+        }
+
+        #endregion
+
+
     }
 }
