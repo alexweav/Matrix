@@ -239,6 +239,17 @@ namespace Matrices {
             return Multiply(a, b);
         }
 
+        //The negative of a matrix a, denoted "-a", is given by multiplying the matrix a by -1.
+        public static Matrix operator -(Matrix a) {
+            return Multiply(-1, a);
+        }
+
+        //Subtraction between matrices a and b, denoted "a - b", is defined as follows:
+        //      a - b := a + (-b)
+        public static Matrix operator -(Matrix a, Matrix b) {
+            return Add(a, -b);
+        }
+
         //For two matrices a and b of the same dimensions, the Hadamard product is a matrix for which
         //each element is the product of its two corresponding elements in matrices a and b
         //HadamardProduct(a, b)[i, j] = a[i, j] * b[i, j]
