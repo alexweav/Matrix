@@ -258,6 +258,21 @@ namespace Matrices {
             return output;
         }
 
+        //Given a matrix a, the transpose of a is the matrix in which the ith row, jth column element of Transpose(a) is the jth row, ith column element of a.
+        //i.e., Transpose(a)[i, j] = a[j, i]
+        //This is the same as reflecting the matrix a over its main diagonal.
+        public static Matrix Transpose(Matrix a) {
+            if (a == null) {
+                throw new NullReferenceException("Cannot take the transpose of a null matrix.");
+            }
+            Matrix output = new Matrix(a.NumColumns, a.NumRows);
+            for (int i = 1; i <= output.NumRows; ++i) {
+                for (int j = 1; j <= output.NumColumns; ++j) {
+                    output[i, j] = a[j, i];
+                }
+            }
+            return output;
+        }
         #endregion
     }
 }

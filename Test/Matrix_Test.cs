@@ -426,6 +426,63 @@ namespace Matrix_Test.cs {
 
         #endregion
 
+        #region Transpose_Test
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void Matrix_TransposeNullMatrix_ThrowsException() {
+            Matrix matrix = null;
+            Matrix matrix2 = Matrix.Transpose(matrix);
+        }
+
+        [TestMethod]
+        public void Matrix_TransposeSquareZeroMatrix_SameAsOriginalMatrix() {
+            Matrix matrix = new Matrix(3);
+            Matrix matrix2 = Matrix.Transpose(matrix);
+            Assert.AreEqual(matrix, matrix2);
+        }
+
+        [TestMethod]
+        public void Matrix_TransposeNonSquareMatrix_CorrectSize() {
+            Matrix matrix = new Matrix(3, 8);
+            Matrix matrix2 = Matrix.Transpose(matrix);
+            Assert.AreEqual(8, matrix2.NumRows);
+            Assert.AreEqual(3, matrix2.NumColumns);
+        }
+
+        [TestMethod]
+        public void Matrix_TransposeValidMatrix_CorrectResult1() {
+            float[,] array = new float[,] { { 1, 2, 3 } };
+            float[,] array2 = new float[,] { { 1 },
+                                             { 2 },
+                                             { 3 } };
+            Matrix matrix = new Matrix(array);
+            Matrix matrix2 = new Matrix(array2);
+            Assert.AreEqual(matrix2, Matrix.Transpose(matrix));
+        }
+
+        [TestMethod]
+        public void Matrix_TransposeValidMatrix_CorrectResult2() {
+            float[,] array = new float[,] { { 1, 2 },
+                                            { 3, 4 }, 
+                                            { 5, 6 } };
+            float[,] array2 = new float[,] { { 1, 3, 5 }, 
+                                             { 2, 4, 6 } };
+            Matrix matrix = new Matrix(array);
+            Matrix matrix2 = new Matrix(array2);
+            Assert.AreEqual(matrix2, Matrix.Transpose(matrix));
+        }
+
+        [TestMethod]
+        public void Matrix_DoubleTransposition_SameMatrix() {
+            float[,] array = new float[,] { { 1, 2 },
+                                            { 3, 4 }, 
+                                            { 5, 6 } };
+            Matrix matrix = new Matrix(array);
+            Assert.AreEqual(matrix, Matrix.Transpose(Matrix.Transpose(matrix)));
+        }
+
+        #endregion
 
     }
 }
